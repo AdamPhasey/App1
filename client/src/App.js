@@ -7,26 +7,32 @@ import {useState, useEffect} from 'react'
 
 
 function App() {
-    const [data, setData] = useState(null);
+    const [data, setData] = useState();
 
     useEffect(() => {
       async function fetchData () {
       let response = await fetch("/api")
       let data = await response.json()
-      setData(data.message);
+      setData(data);
       } fetchData()
     }, []);
     
 if(!data){
-  return <div><h1>Nothing here</h1></div>
+  return <div><h1>Nothing here {console.log(data)}</h1></div>
 }
   
-
-  return (
+  return ( 
       <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>{data}</p>
+    
+       
+      
+         <p>This is the data section: {data.items.measures[0].latestReading.value}</p>
+         <p>The console.log = {console.dir("This is data items in p tag " + data.measures)}</p>
+      
+      
+  
       </header>
     </div>
 
